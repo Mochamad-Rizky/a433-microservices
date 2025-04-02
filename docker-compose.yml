@@ -1,22 +1,22 @@
-version: '3.7'
+version: '3.7'  # Docker Compose file format version
 
-services:
-  item-app:
-    image: ghcr.io/mochamad-rizky/item-app:v1
-    restart: always
-    ports:
-      - "80:8080"
-    depends_on:
-      - item-db
-    environment:
-      - DB_HOST=item-db
-      - NODE_ENV=production
+services:  # Definition of all services (containers)
+  item-app:  # First service named item-app
+    image: ghcr.io/mochamad-rizky/item-app:v1  # Docker image to use for this service
+    restart: always  # Always restart container if it stops
+    ports:  # Port mapping configuration
+      - "80:8080"  # Map host port 80 to container port 8080
+    depends_on:  # Define service dependencies
+      - item-db  # This service depends on item-db service
+    environment:  # Environment variables for the container
+      - DB_HOST=item-db  # Set database host to item-db service
+      - NODE_ENV=production  # Set Node environment to production
 
-  item-db:
-    image: mongo:3
-    restart: always
-    volumes:
-      - app-db:/data/db
+  item-db:  # Second service named item-db
+    image: mongo:3  # Use MongoDB version 3 image
+    restart: always  # Always restart container if it stops
+    volumes:  # Volume configuration
+      - app-db:/data/db  # Mount app-db volume to /data/db in container
 
-volumes:
-  app-db:
+volumes:  # Named volumes declaration
+  app-db:  # Define app-db volume
